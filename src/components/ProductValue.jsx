@@ -55,7 +55,7 @@ const benefits = [
         title: 'Works with Free AI Tools',
         description: 'Use with ChatGPT, Gemini, Claude – no paid subscriptions needed.',
         details: 'All prompts work perfectly with free versions of popular AI tools. No paid API keys or premium subscriptions required.',
-        gradient: 'from-orange-500 to-pink-500'
+        gradient: 'from-orange-500 to-amber-500'
     }
 ]
 

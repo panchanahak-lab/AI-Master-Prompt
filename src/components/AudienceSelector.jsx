@@ -127,8 +127,8 @@ export default function AudienceSelector() {
                             key={audience.id}
                             onClick={() => setSelectedAudience(audience)}
                             className={`px-5 py-3 rounded-xl text-sm font-medium transition-all duration-300 ${selectedAudience.id === audience.id
-                                    ? 'bg-gradient-to-r from-violet-500 to-blue-500 text-white shadow-lg shadow-violet-500/25'
-                                    : 'bg-white/5 text-zinc-400 hover:bg-white/10 hover:text-white border border-white/5'
+                                ? 'bg-gradient-to-r from-indigo-500 to-blue-500 text-white shadow-lg shadow-indigo-500/25'
+                                : 'bg-white/5 text-zinc-400 hover:bg-white/10 hover:text-white border border-white/5'
                                 }`}
                         >
                             <span className="mr-2">{audience.icon}</span>
@@ -176,7 +176,7 @@ export default function AudienceSelector() {
 
                         {/* Sample Prompt Card */}
                         <div className="glass-card p-8 relative overflow-hidden">
-                            <div className="absolute top-4 right-4 px-3 py-1 bg-violet-500/20 text-violet-400 text-xs font-medium rounded-full">
+                            <div className="absolute top-4 right-4 px-3 py-1 bg-indigo-500/20 text-indigo-400 text-xs font-medium rounded-full">
                                 Sample Prompt
                             </div>
                             <h4 className="text-lg font-bold text-white mb-4 mt-2">{selectedAudience.samplePrompt.title}</h4>

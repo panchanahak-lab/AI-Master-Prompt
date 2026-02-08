@@ -73,18 +73,18 @@ export default function HowItWorks() {
                         >
                             {/* Connector Line (Desktop only) */}
                             {index < steps.length - 1 && (
-                                <div className="hidden md:block absolute top-12 left-[calc(50%+3rem)] w-[calc(100%-6rem)] h-0.5 bg-gradient-to-r from-violet-500/50 to-transparent" />
+                                <div className="hidden md:block absolute top-12 left-[calc(50%+3rem)] w-[calc(100%-6rem)] h-0.5 bg-gradient-to-r from-indigo-500/50 to-transparent" />
                             )}
 
                             {/* Card */}
                             <div className="glass-card hover-card p-8 text-center h-full">
                                 {/* Step Number */}
-                                <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-gradient-to-br from-violet-500 to-blue-500 text-white mb-6">
+                                <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-gradient-to-br from-indigo-500 to-blue-500 text-white mb-6">
                                     {step.icon}
                                 </div>
 
                                 {/* Step Label */}
-                                <div className="text-violet-400 text-sm font-medium mb-2">
+                                <div className="text-indigo-400 text-sm font-medium mb-2">
                                     Step {step.number}
                                 </div>
 

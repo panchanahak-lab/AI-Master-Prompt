@@ -25,7 +25,7 @@ export default function Footer() {
     ]
 
     return (
-        <footer className="py-12 bg-[#0a0a0f] border-t border-white/5">
+        <footer className="py-12 bg-[#020617] border-t border-white/5">
             <div className="section-container">
                 <div className="grid md:grid-cols-4 gap-10 mb-10">
                     {/* Brand */}
