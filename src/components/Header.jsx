@@ -34,8 +34,8 @@ export default function Header() {
             animate={{ y: 0 }}
             transition={{ duration: 0.5, ease: 'easeOut' }}
             className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${isScrolled
-                ? 'bg-[#0a0a0f]/90 backdrop-blur-md border-b border-white/10 shadow-lg shadow-violet-500/5'
-                : 'bg-transparent'
+                ? 'bg-[#0a0a0f]/70 backdrop-blur-lg border-b border-white/5'
+                : 'bg-transparent border-b border-transparent'
                 }`}
         >
             <div className="section-container">

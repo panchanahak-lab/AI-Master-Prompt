@@ -86,7 +86,8 @@ export default function Hero() {
                         transition={{ duration: 0.6, delay: 0.1 }}
                         className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold mb-6 leading-tight"
                     >
-                        Master AI Prompts.{' '}
+                        Master AI Prompts.
+                        <br className="hidden md:block" />
                         <span className="gradient-text">Get Better Results.</span>{' '}
                         <span className="text-white">Faster.</span>
                     </motion.h1>
