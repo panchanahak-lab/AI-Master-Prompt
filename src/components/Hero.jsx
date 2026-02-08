@@ -1,153 +1,100 @@
 import { motion } from 'framer-motion'
-import { useEffect, useState } from 'react'
+import { useState, useEffect } from 'react'
 
-/**
- * Hero Section
- * - Bold headline with gradient text
- * - Subtitle addressing all 5 audiences
- * - Primary CTA: "Buy Now – ₹299"
- * - Secondary CTA: "Preview Prompts"
- * - Animated background with gradient orbs
- */
 export default function Hero() {
-    // Animated counter for "300+" prompts
+    // Simplified prompt counter (no heavy animation loops)
     const [promptCount, setPromptCount] = useState(0)
 
     useEffect(() => {
-        const duration = 2000 // 2 seconds
-        const steps = 60
-        const increment = 300 / steps
-        let current = 0
+        let start = 0
+        const end = 300
+        const duration = 1500
+        const increment = end / (duration / 16)
 
         const timer = setInterval(() => {
-            current += increment
-            if (current >= 300) {
-                setPromptCount(300)
+            start += increment
+            if (start >= end) {
+                setPromptCount(end)
                 clearInterval(timer)
             } else {
-                setPromptCount(Math.floor(current))
+                setPromptCount(Math.floor(start))
             }
-        }, duration / steps)
-
+        }, 16)
         return () => clearInterval(timer)
     }, [])
 
     return (
-        <section className="gradient-bg noise-overlay min-h-screen flex items-center pt-20 pb-16 relative overflow-hidden">
-            {/* Floating Orbs - Decorative Background Elements */}
-            <div className="absolute inset-0 overflow-hidden pointer-events-none">
-                <motion.div
-                    animate={{
-                        y: [0, -20, 0],
-                        x: [0, 10, 0],
-                    }}
-                    transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
-                    className="absolute top-1/4 -left-20 w-96 h-96 bg-violet-500/20 rounded-full blur-3xl"
-                />
-                <motion.div
-                    animate={{
-                        y: [0, 20, 0],
-                        x: [0, -15, 0],
-                    }}
-                    transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
-                    className="absolute bottom-1/4 -right-20 w-80 h-80 bg-blue-500/20 rounded-full blur-3xl"
-                />
-                <motion.div
-                    animate={{
-                        y: [0, 15, 0],
-                    }}
-                    transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
-                    className="absolute top-1/2 left-1/2 -translate-x-1/2 w-64 h-64 bg-pink-500/10 rounded-full blur-3xl"
-                />
-            </div>
-
+        <section className="gradient-bg min-h-[90vh] flex items-center pt-32 pb-20 relative overflow-hidden">
             <div className="section-container relative z-10">
-                <div className="max-w-4xl mx-auto text-center">
-                    {/* Badge */}
+                <div className="max-w-3xl mx-auto text-center">
+
+                    {/* Minimal Badge */}
                     <motion.div
-                        initial={{ opacity: 0, y: 20 }}
+                        initial={{ opacity: 0, y: 10 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.5 }}
-                        className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 mb-8"
+                        className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/5 border border-white/5 mb-8"
                     >
-                        <span className="relative flex h-2 w-2">
-                            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
-                            <span className="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
-                        </span>
-                        <span className="text-sm text-zinc-400">
-                            <span className="text-white font-semibold">{promptCount}+</span> Ready-to-Use AI Prompts
+                        <div className="w-1.5 h-1.5 rounded-full bg-emerald-500 shadow-[0_0_8px_rgba(16,185,129,0.5)]" />
+                        <span className="text-xs font-medium text-slate-400 tracking-wide">
+                            {promptCount}+ PROMTS INCLUDED
                         </span>
                     </motion.div>
 
-                    {/* Main Headline */}
+                    {/* Refined Headline */}
                     <motion.h1
-                        initial={{ opacity: 0, y: 30 }}
+                        initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.6, delay: 0.1 }}
-                        className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold mb-6 leading-tight"
+                        className="text-5xl md:text-6xl lg:text-7xl font-bold mb-8 tracking-tight leading-tight"
                     >
-                        Master AI Prompts.
-                        <br className="hidden md:block" />
-                        <span className="gradient-text">Get Better Results.</span>{' '}
-                        <span className="text-white">Faster.</span>
+                        <span className="text-white block mb-2">Master AI Prompts</span>
+                        <span className="gradient-text text-4xl md:text-5xl lg:text-6xl font-semibold">
+                            Get Better Results — Faster
+                        </span>
                     </motion.h1>
 
-                    {/* Subtitle */}
+                    {/* Clean Subtitle */}
                     <motion.p
-                        initial={{ opacity: 0, y: 30 }}
+                        initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.6, delay: 0.2 }}
-                        className="text-lg md:text-xl text-zinc-400 mb-10 max-w-2xl mx-auto leading-relaxed"
+                        className="text-lg text-slate-400 mb-12 max-w-xl mx-auto leading-relaxed"
                     >
-                        One premium prompt pack built for{' '}
-                        <span className="text-white">students</span>,{' '}
-                        <span className="text-white">job seekers</span>,{' '}
-                        <span className="text-white">creators</span>,{' '}
-                        <span className="text-white">freelancers</span>, and{' '}
-                        <span className="text-white">businesses</span>.
+                        One premium prompt pack built for students, job seekers, creators, and businesses. Stop guessing. Start creating.
                     </motion.p>
 
-                    {/* CTA Buttons */}
+                    {/* CTAs - Strict Hierarchy */}
                     <motion.div
-                        initial={{ opacity: 0, y: 30 }}
+                        initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.6, delay: 0.3 }}
-                        className="flex flex-col sm:flex-row items-center justify-center gap-4"
+                        className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-16"
                     >
-                        <a href="#pricing" className="btn-primary text-lg py-4 px-8 w-full sm:w-auto">
-                            Buy Now – ₹299
+                        <a href="#pricing" className="btn-primary w-full sm:w-auto min-w-[200px] flex items-center justify-center gap-2 group">
+                            Get Instant Access
+                            <span className="opacity-70 text-sm font-normal">— ₹299</span>
                         </a>
-                        <a href="#preview" className="btn-secondary text-lg py-4 px-8 w-full sm:w-auto">
+                        <a href="#preview" className="btn-secondary w-full sm:w-auto min-w-[160px]">
                             Preview Prompts
                         </a>
                     </motion.div>
 
-                    {/* Trust Indicators */}
-                    {/* Trust Indicators */}
+                    {/* Minimal Trust Indicators */}
                     <motion.div
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
-                        transition={{ duration: 0.6, delay: 0.5 }}
-                        className="mt-12 flex flex-wrap items-center justify-center gap-x-8 gap-y-4 text-sm text-zinc-500 max-w-3xl mx-auto"
+                        transition={{ duration: 0.8, delay: 0.5 }}
+                        className="pt-8 border-t border-white/5 flex flex-wrap justify-center gap-x-8 gap-y-4"
                     >
-                        <div className="flex items-center gap-2">
-                            <svg className="w-5 h-5 text-green-500" fill="currentColor" viewBox="0 0 20 20">
-                                <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
-                            </svg>
-                            <span>Instant Download</span>
-                        </div>
-                        <div className="flex items-center gap-2">
-                            <svg className="w-5 h-5 text-green-500" fill="currentColor" viewBox="0 0 20 20">
-                                <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
-                            </svg>
-                            <span>Works with ChatGPT, Gemini & More</span>
-                        </div>
-                        <div className="flex items-center gap-2">
-                            <svg className="w-5 h-5 text-green-500" fill="currentColor" viewBox="0 0 20 20">
-                                <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
-                            </svg>
-                            <span>5 Categories Covered</span>
-                        </div>
+                        {['Instant PDF Download', 'Works with Free AI Tools', 'Lifetime Access'].map((text, i) => (
+                            <div key={i} className="flex items-center gap-2 text-xs font-medium text-slate-500 uppercase tracking-wider">
+                                <svg className="w-4 h-4 text-slate-600" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                                </svg>
+                                {text}
+                            </div>
+                        ))}
                     </motion.div>
                 </div>
             </div>

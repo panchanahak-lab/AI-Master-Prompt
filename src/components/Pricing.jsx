@@ -59,10 +59,10 @@ export default function Pricing() {
                     {/* Card with Gradient Border */}
                     <div className="relative group">
                         {/* Animated Gradient Border */}
-                        <div className="absolute -inset-0.5 bg-gradient-to-r from-violet-500 via-blue-500 to-pink-500 rounded-2xl opacity-50 group-hover:opacity-75 blur transition duration-500" />
+                        <div className="absolute -inset-0.5 bg-gradient-to-r from-indigo-500 via-blue-500 to-indigo-500 rounded-2xl opacity-30 group-hover:opacity-60 blur transition duration-500" />
 
                         {/* Card Content */}
-                        <div className="relative bg-[#0a0a0f] rounded-2xl p-8 md:p-10">
+                        <div className="relative bg-[#020617] rounded-2xl p-8 md:p-10 border border-white/5">
                             {/* Badge */}
                             <div className="flex justify-center mb-6">
                                 <span className="px-4 py-1.5 bg-gradient-to-r from-violet-500/20 to-blue-500/20 text-violet-400 text-sm font-medium rounded-full border border-violet-500/30">
