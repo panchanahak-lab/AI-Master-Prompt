@@ -18,29 +18,33 @@
 /* CSS Custom Properties for Easy Theming */
 :root {
   /* Primary Colors - Purple/Blue Gradient Theme */
-  --primary-start: #7c3aed;      /* Violet */
-  --primary-end: #2563eb;        /* Blue */
-  --primary-hover: #6d28d9;      /* Darker Violet */
-  
+  --primary-start: #7c3aed;
+  /* Violet */
+  --primary-end: #2563eb;
+  /* Blue */
+  --primary-hover: #6d28d9;
+  /* Darker Violet */
+
   /* Accent Colors */
   --accent-pink: #ec4899;
   --accent-cyan: #06b6d4;
   --accent-green: #10b981;
-  
+
   /* Background Colors */
   --bg-dark: #0a0a0f;
+  --bg-section-alt: #0d0d14;
   --bg-card: rgba(255, 255, 255, 0.03);
   --bg-card-hover: rgba(255, 255, 255, 0.06);
-  
+
   /* Text Colors */
   --text-primary: #ffffff;
   --text-secondary: #a1a1aa;
   --text-muted: #71717a;
-  
+
   /* Glass Effect */
   --glass-bg: rgba(255, 255, 255, 0.05);
   --glass-border: rgba(255, 255, 255, 0.1);
-  
+
   /* Glow Effects */
   --glow-primary: rgba(124, 58, 237, 0.5);
   --glow-blue: rgba(37, 99, 235, 0.5);
@@ -66,6 +70,72 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+/* ===================================
+   SECTION STYLES - Organized Layout
+   =================================== */
+
+/* Base Section with proper spacing */
+.section-base {
+  padding-top: 6rem;
+  padding-bottom: 6rem;
+  position: relative;
+}
+
+@media (min-width: 768px) {
+  .section-base {
+    padding-top: 8rem;
+    padding-bottom: 8rem;
+  }
+}
+
+/* Alternating Section Backgrounds for visual separation */
+.section-dark {
+  background-color: var(--bg-dark);
+}
+
+.section-alt {
+  background-color: var(--bg-section-alt);
+}
+
+/* Section Divider - Gradient Line */
+.section-divider {
+  height: 1px;
+  background: linear-gradient(90deg, transparent 0%, var(--glass-border) 20%, var(--primary-start) 50%, var(--glass-border) 80%, transparent 100%);
+  margin: 0;
+}
+
+/* Section Header Styles */
+.section-header {
+  text-align: center;
+  margin-bottom: 4rem;
+}
+
+.section-header h2 {
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  line-height: 1.2;
+}
+
+@media (min-width: 768px) {
+  .section-header h2 {
+    font-size: 2.5rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .section-header h2 {
+    font-size: 3rem;
+  }
+}
+
+.section-header p {
+  color: var(--text-secondary);
+  font-size: 1.125rem;
+  max-width: 42rem;
+  margin: 0 auto;
+}
+
 /* Animated Gradient Background */
 .gradient-bg {
   background: linear-gradient(135deg, var(--bg-dark) 0%, #1a1a2e 50%, var(--bg-dark) 100%);
@@ -80,7 +150,7 @@ body {
   left: 0;
   right: 0;
   bottom: 0;
-  background: 
+  background:
     radial-gradient(ellipse 80% 50% at 50% -20%, rgba(124, 58, 237, 0.15), transparent),
     radial-gradient(ellipse 60% 40% at 80% 50%, rgba(37, 99, 235, 0.1), transparent),
     radial-gradient(ellipse 50% 30% at 20% 80%, rgba(236, 72, 153, 0.08), transparent);
@@ -89,10 +159,13 @@ body {
 }
 
 @keyframes gradientShift {
-  0%, 100% {
+
+  0%,
+  100% {
     opacity: 1;
     transform: scale(1) rotate(0deg);
   }
+
   50% {
     opacity: 0.8;
     transform: scale(1.02) rotate(1deg);
@@ -157,7 +230,7 @@ body {
   left: -100%;
   width: 100%;
   height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
   transition: left 0.5s;
 }
 

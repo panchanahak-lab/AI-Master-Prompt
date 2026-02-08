@@ -12,41 +12,22 @@ import Footer from './components/Footer'
 /**
  * AI Master Prompt - Premium Landing Page
  * 
- * A high-conversion, interactive website for selling the 
- * "AI Master Prompt – 300+ AI Prompts Mega Pack" digital product.
- * 
- * Tech Stack:
- * - React 18 + Vite
- * - Tailwind CSS
- * - Framer Motion (animations)
- * 
- * CUSTOMIZATION GUIDE:
- * 
- * Colors:
- * - Edit CSS variables in /src/index.css (lines 18-42)
- * - Primary: --primary-start, --primary-end
- * - Accent: --accent-pink, --accent-cyan, --accent-green
- * 
- * Fonts:
- * - Edit Google Font import in /src/index.css (line 15)
- * - Update font-family in body styles
- * 
- * Content:
- * - Hero text: /src/components/Hero.jsx
- * - Audience data: /src/components/AudienceSelector.jsx (lines 16-89)
- * - Benefits: /src/components/ProductValue.jsx (lines 12-49)
- * - Sample prompts: /src/components/PromptPreview.jsx (lines 15-60)
- * - Pricing features: /src/components/Pricing.jsx (lines 13-21)
- * - FAQ questions: /src/components/FAQ.jsx (lines 12-67)
- * 
- * Payment Link:
- * - Edit paymentLink in /src/components/Pricing.jsx (line 25)
- * - WhatsApp link in /src/components/HowItWorks.jsx (line 99)
- * 
- * Contact Email:
- * - /src/components/FAQ.jsx (line 115)
- * - /src/components/Footer.jsx (line 41)
+ * SECTION ORDER (organized for conversion):
+ * 1. Hero - Hook visitors immediately
+ * 2. Audience Selector - Show relevance
+ * 3. Product Value - Build desire
+ * 4. Prompt Preview - Prove quality
+ * 5. Pricing - Make the offer
+ * 6. How It Works - Remove friction
+ * 7. FAQ - Handle objections
+ * 8. Trust - Build confidence
+ * 9. Footer - Final links
  */
+
+// Section divider component for visual separation
+const SectionDivider = () => (
+  <div className="section-divider" />
+)
 
 function App() {
   return (
@@ -54,31 +35,43 @@ function App() {
       {/* Sticky Header */}
       <Header />
 
-      {/* Hero Section - Main headline and CTAs */}
+      {/* SECTION 1: Hero - Main headline and CTAs */}
       <Hero />
 
-      {/* Audience Selector - Who this product is for */}
+      <SectionDivider />
+
+      {/* SECTION 2: Audience Selector - Who this product is for */}
       <AudienceSelector />
 
-      {/* Product Value - Why this matters */}
+      <SectionDivider />
+
+      {/* SECTION 3: Product Value - Why this matters */}
       <ProductValue />
 
-      {/* Prompt Preview - Sample prompts with expand/collapse */}
+      <SectionDivider />
+
+      {/* SECTION 4: Prompt Preview - Sample prompts */}
       <PromptPreview />
 
-      {/* Pricing Section - Single pricing card */}
+      <SectionDivider />
+
+      {/* SECTION 5: Pricing - Single pricing card */}
       <Pricing />
 
-      {/* How It Works - 3 simple steps */}
+      <SectionDivider />
+
+      {/* SECTION 6: How It Works - 3 simple steps */}
       <HowItWorks />
 
-      {/* FAQ Section - Accordion style */}
+      <SectionDivider />
+
+      {/* SECTION 7: FAQ - Accordion style */}
       <FAQ />
 
-      {/* Trust & Legal - Ethics, privacy, terms */}
+      {/* SECTION 8: Trust & Legal - Ethics, privacy, terms */}
       <Trust />
 
-      {/* Footer - Brand, links, social */}
+      {/* SECTION 9: Footer - Brand, links, social */}
       <Footer />
     </div>
   )

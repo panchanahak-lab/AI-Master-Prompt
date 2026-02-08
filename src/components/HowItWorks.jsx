@@ -42,7 +42,7 @@ const steps = [
 
 export default function HowItWorks() {
     return (
-        <section className="py-20 md:py-32 bg-[#0a0a0f] relative">
+        <section className="section-base section-alt">
             <div className="section-container">
                 {/* Section Header */}
                 <motion.div
@@ -50,18 +50,18 @@ export default function HowItWorks() {
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                     transition={{ duration: 0.6 }}
-                    className="text-center mb-16"
+                    className="section-header"
                 >
-                    <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4">
+                    <h2>
                         Get Started in <span className="gradient-text">3 Simple Steps</span>
                     </h2>
-                    <p className="text-zinc-400 text-lg max-w-2xl mx-auto">
+                    <p>
                         From purchase to using your first prompt – it takes less than 2 minutes.
                     </p>
                 </motion.div>
 
                 {/* Steps */}
-                <div className="grid md:grid-cols-3 gap-8">
+                <div className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
                     {steps.map((step, index) => (
                         <motion.div
                             key={step.number}

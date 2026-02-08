@@ -59,7 +59,7 @@ export default function FAQ() {
     }
 
     return (
-        <section id="faq" className="py-20 md:py-32 bg-gradient-to-b from-[#0a0a0f] to-[#0f0f18] relative">
+        <section id="faq" className="section-base section-dark">
             <div className="section-container">
                 {/* Section Header */}
                 <motion.div
@@ -67,12 +67,12 @@ export default function FAQ() {
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                     transition={{ duration: 0.6 }}
-                    className="text-center mb-16"
+                    className="section-header"
                 >
-                    <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4">
+                    <h2>
                         Frequently Asked <span className="gradient-text">Questions</span>
                     </h2>
-                    <p className="text-zinc-400 text-lg max-w-2xl mx-auto">
+                    <p>
                         Everything you need to know about the AI Master Prompt Pack.
                     </p>
                 </motion.div>

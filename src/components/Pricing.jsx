@@ -25,7 +25,7 @@ export default function Pricing() {
     const paymentLink = 'https://rzp.io/l/ai-master-prompt' // Example Razorpay link
 
     return (
-        <section id="pricing" className="py-20 md:py-32 bg-gradient-to-b from-[#0f0f18] to-[#0a0a0f] relative overflow-hidden">
+        <section id="pricing" className="section-base section-dark relative overflow-hidden">
             {/* Background Gradient Orbs */}
             <div className="absolute inset-0 overflow-hidden pointer-events-none">
                 <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-violet-500/10 rounded-full blur-3xl" />
@@ -38,12 +38,12 @@ export default function Pricing() {
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                     transition={{ duration: 0.6 }}
-                    className="text-center mb-16"
+                    className="section-header"
                 >
-                    <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4">
+                    <h2>
                         One Price. <span className="gradient-text">Unlimited Value.</span>
                     </h2>
-                    <p className="text-zinc-400 text-lg max-w-2xl mx-auto">
+                    <p>
                         No subscriptions. No hidden fees. Pay once, use forever.
                     </p>
                 </motion.div>
@@ -123,19 +123,14 @@ export default function Pricing() {
                     whileInView={{ opacity: 1 }}
                     viewport={{ once: true }}
                     transition={{ duration: 0.5, delay: 0.3 }}
-                    className="flex justify-center items-center gap-6 mt-10 text-zinc-500 text-sm"
+                    className="flex flex-wrap justify-center items-center gap-4 md:gap-6 mt-10 text-zinc-500 text-sm"
                 >
                     <span>Accepted:</span>
                     <div className="flex items-center gap-4">
-                        <span className="flex items-center gap-1">
-                            <svg className="w-8 h-8" viewBox="0 0 24 24" fill="currentColor">
-                                <path d="M21.6 8.4H2.4a2.4 2.4 0 00-2.4 2.4v2.4a2.4 2.4 0 002.4 2.4h19.2a2.4 2.4 0 002.4-2.4v-2.4a2.4 2.4 0 00-2.4-2.4z" />
-                            </svg>
-                        </span>
                         <span>UPI</span>
-                        <span>•</span>
+                        <span className="text-zinc-700">•</span>
                         <span>Cards</span>
-                        <span>•</span>
+                        <span className="text-zinc-700">•</span>
                         <span>Net Banking</span>
                     </div>
                 </motion.div>

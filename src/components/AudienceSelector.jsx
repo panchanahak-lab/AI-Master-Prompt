@@ -96,7 +96,7 @@ export default function AudienceSelector() {
     const [selectedAudience, setSelectedAudience] = useState(audiences[0])
 
     return (
-        <section id="audience" className="py-20 md:py-32 bg-[#0a0a0f] relative">
+        <section id="audience" className="section-base section-alt">
             <div className="section-container">
                 {/* Section Header */}
                 <motion.div
@@ -104,12 +104,12 @@ export default function AudienceSelector() {
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                     transition={{ duration: 0.6 }}
-                    className="text-center mb-16"
+                    className="section-header"
                 >
-                    <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4">
+                    <h2>
                         Built for <span className="gradient-text">Your Success</span>
                     </h2>
-                    <p className="text-zinc-400 text-lg max-w-2xl mx-auto">
+                    <p>
                         Whether you're a student or a business owner, we have prompts tailored specifically for your needs.
                     </p>
                 </motion.div>
@@ -145,7 +145,7 @@ export default function AudienceSelector() {
                         animate={{ opacity: 1, y: 0 }}
                         exit={{ opacity: 0, y: -20 }}
                         transition={{ duration: 0.4 }}
-                        className="grid md:grid-cols-2 gap-8"
+                        className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto"
                     >
                         {/* Benefits Card */}
                         <div className="glass-card p-8">
@@ -179,7 +179,7 @@ export default function AudienceSelector() {
                             <div className="absolute top-4 right-4 px-3 py-1 bg-violet-500/20 text-violet-400 text-xs font-medium rounded-full">
                                 Sample Prompt
                             </div>
-                            <h4 className="text-lg font-bold text-white mb-4">{selectedAudience.samplePrompt.title}</h4>
+                            <h4 className="text-lg font-bold text-white mb-4 mt-2">{selectedAudience.samplePrompt.title}</h4>
                             <div className="bg-black/30 rounded-lg p-4 border border-white/5">
                                 <p className="text-zinc-400 text-sm leading-relaxed font-mono">
                                     {selectedAudience.samplePrompt.prompt}

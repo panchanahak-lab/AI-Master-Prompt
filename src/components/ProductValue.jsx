@@ -63,7 +63,7 @@ export default function ProductValue() {
     const [hoveredCard, setHoveredCard] = useState(null)
 
     return (
-        <section className="py-20 md:py-32 bg-gradient-to-b from-[#0a0a0f] to-[#0f0f18] relative">
+        <section className="section-base section-dark">
             <div className="section-container">
                 {/* Section Header */}
                 <motion.div
@@ -71,18 +71,18 @@ export default function ProductValue() {
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                     transition={{ duration: 0.6 }}
-                    className="text-center mb-16"
+                    className="section-header"
                 >
-                    <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4">
+                    <h2>
                         Why <span className="gradient-text">300+ Prompts</span> Matter
                     </h2>
-                    <p className="text-zinc-400 text-lg max-w-2xl mx-auto">
+                    <p>
                         It's not just about having prompts – it's about having the right ones that actually work.
                     </p>
                 </motion.div>
 
                 {/* Benefits Grid */}
-                <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto">
                     {benefits.map((benefit, index) => (
                         <motion.div
                             key={benefit.id}

@@ -8,7 +8,7 @@ import { motion, AnimatePresence } from 'framer-motion'
  * - Blur effect on locked prompts with "Unlock full access"
  */
 
-// Sample prompts for preview
+// Sample prompts for preview - FIRST 3 ARE UNLOCKED
 const samplePrompts = [
     {
         id: 1,
@@ -35,21 +35,21 @@ const samplePrompts = [
         id: 4,
         category: 'Productivity',
         title: 'Weekly Planning Assistant',
-        prompt: 'Act as a productivity coach...',
+        prompt: 'Act as a productivity coach specialized in time management...',
         isLocked: true
     },
     {
         id: 5,
         category: 'Learning',
         title: 'Concept Simplifier',
-        prompt: 'Act as an expert teacher who specializes in...',
+        prompt: 'Act as an expert teacher who specializes in breaking down complex concepts...',
         isLocked: true
     },
     {
         id: 6,
         category: 'Freelance',
         title: 'Client Onboarding Questions',
-        prompt: 'Act as a successful freelance consultant...',
+        prompt: 'Act as a successful freelance consultant with 10+ years experience...',
         isLocked: true
     }
 ]
@@ -62,7 +62,7 @@ export default function PromptPreview() {
     }
 
     return (
-        <section id="preview" className="py-20 md:py-32 bg-[#0a0a0f] relative">
+        <section id="preview" className="section-base section-alt">
             <div className="section-container">
                 {/* Section Header */}
                 <motion.div
@@ -70,18 +70,18 @@ export default function PromptPreview() {
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                     transition={{ duration: 0.6 }}
-                    className="text-center mb-16"
+                    className="section-header"
                 >
-                    <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4">
+                    <h2>
                         Preview <span className="gradient-text">Real Prompts</span>
                     </h2>
-                    <p className="text-zinc-400 text-lg max-w-2xl mx-auto">
+                    <p>
                         See exactly what you're getting. No fluff, no filler – just powerful prompts that work.
                     </p>
                 </motion.div>
 
                 {/* Prompts Grid */}
-                <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
                     {samplePrompts.map((item, index) => (
                         <motion.div
                             key={item.id}
@@ -89,15 +89,15 @@ export default function PromptPreview() {
                             whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true }}
                             transition={{ duration: 0.5, delay: index * 0.1 }}
-                            className={`glass-card overflow-hidden relative ${item.isLocked ? 'cursor-not-allowed' : 'cursor-pointer'}`}
+                            className={`glass-card overflow-hidden relative ${item.isLocked ? 'cursor-not-allowed' : 'cursor-pointer hover-card'}`}
                         >
                             {/* Locked Overlay */}
                             {item.isLocked && (
-                                <div className="absolute inset-0 bg-[#0a0a0f]/80 backdrop-blur-sm z-10 flex flex-col items-center justify-center">
+                                <div className="absolute inset-0 bg-[#0a0a0f]/90 backdrop-blur-sm z-10 flex flex-col items-center justify-center">
                                     <svg className="w-10 h-10 text-zinc-500 mb-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
                                     </svg>
-                                    <span className="text-zinc-400 text-sm">Unlock with purchase</span>
+                                    <span className="text-zinc-400 text-sm font-medium">Unlock with purchase</span>
                                 </div>
                             )}
 
@@ -122,6 +122,11 @@ export default function PromptPreview() {
                                     )}
                                 </div>
                                 <h3 className="text-lg font-bold text-white">{item.title}</h3>
+
+                                {/* Collapsed hint for unlocked items */}
+                                {!item.isLocked && expandedPrompt !== item.id && (
+                                    <p className="text-zinc-500 text-sm mt-2">Click to view full prompt →</p>
+                                )}
                             </div>
 
                             {/* Expandable Prompt Content */}
@@ -144,7 +149,7 @@ export default function PromptPreview() {
                                                 <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
                                                 </svg>
-                                                <span>Click to copy in the full version</span>
+                                                <span>Copy-paste ready in the full version</span>
                                             </div>
                                         </div>
                                     </motion.div>
