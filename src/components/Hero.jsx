@@ -122,11 +122,12 @@ export default function Hero() {
                     </motion.div>
 
                     {/* Trust Indicators */}
+                    {/* Trust Indicators */}
                     <motion.div
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
                         transition={{ duration: 0.6, delay: 0.5 }}
-                        className="mt-12 flex flex-wrap items-center justify-center gap-8 text-sm text-zinc-500"
+                        className="mt-12 flex flex-wrap items-center justify-center gap-x-8 gap-y-4 text-sm text-zinc-500 max-w-3xl mx-auto"
                     >
                         <div className="flex items-center gap-2">
                             <svg className="w-5 h-5 text-green-500" fill="currentColor" viewBox="0 0 20 20">
