@@ -1,195 +1,119 @@
 import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-
-/**
- * AudienceSelector Component
- * - 5 clickable audience tabs/cards
- * - On selection: shows specific benefits + sample prompt
- * - Smooth Framer Motion transitions between audiences
- */
-
-// Audience data with benefits and sample prompts
-const audiences = [
-    {
-        id: 'students',
-        title: 'Students',
-        icon: '📚',
-        tagline: 'Excel in academics with AI assistance',
-        benefits: [
-            'Write better essays and assignments faster',
-            'Prepare for exams with AI-powered study guides',
-            'Research complex topics in simple language',
-            'Get instant explanations for difficult concepts'
-        ],
-        samplePrompt: {
-            title: 'Essay Writing Assistant',
-            prompt: 'Act as an academic writing expert. Help me write a 1500-word essay on [TOPIC]. First, create an outline with a strong thesis statement. Then, expand each section with academic language, proper citations format (APA/MLA), and smooth transitions. Include counter-arguments and rebuttals. End with a compelling conclusion that reinforces the thesis.'
-        }
-    },
-    {
-        id: 'jobseekers',
-        title: 'Job Seekers',
-        icon: '💼',
-        tagline: 'Land your dream job faster',
-        benefits: [
-            'Create ATS-friendly resumes that get noticed',
-            'Craft personalized cover letters in minutes',
-            'Prepare for interviews with mock Q&A sessions',
-            'Negotiate salary with confidence'
-        ],
-        samplePrompt: {
-            title: 'Interview Preparation Coach',
-            prompt: 'Act as a senior HR professional and interview coach. I\'m applying for [JOB TITLE] at [COMPANY TYPE]. Give me 10 likely interview questions with detailed answer frameworks using the STAR method. Include behavioral, technical, and situational questions. For each answer, highlight what interviewers are really looking for and common mistakes to avoid.'
-        }
-    },
-    {
-        id: 'business',
-        title: 'Business Owners',
-        icon: '🏢',
-        tagline: 'Scale your business with AI automation',
-        benefits: [
-            'Automate customer support responses',
-            'Generate marketing copy that converts',
-            'Create SOPs and training materials',
-            'Analyze data and make better decisions'
-        ],
-        samplePrompt: {
-            title: 'Marketing Copy Generator',
-            prompt: 'Act as a direct response copywriter with 15 years of experience. Create 5 variations of ad copy for my [PRODUCT/SERVICE] targeting [AUDIENCE]. Each version should include: attention-grabbing headline, pain point agitation, unique value proposition, social proof placeholder, and clear CTA. Use psychological triggers like scarcity, urgency, and FOMO. Keep each version under 150 words for social media ads.'
-        }
-    },
-    {
-        id: 'creators',
-        title: 'Instagram Creators',
-        icon: '📱',
-        tagline: 'Create viral content consistently',
-        benefits: [
-            'Generate engaging captions in seconds',
-            'Plan 30 days of content in one sitting',
-            'Write scripts for Reels that hook viewers',
-            'Build a consistent brand voice'
-        ],
-        samplePrompt: {
-            title: 'Viral Reel Script Writer',
-            prompt: 'Act as a viral content strategist for Instagram. Create a 60-second Reel script for my [NICHE] account about [TOPIC]. Structure: 1) Hook in first 3 seconds (pattern interrupt), 2) Problem statement, 3) 3-step solution, 4) Call to action. Include text overlay suggestions, trending audio recommendations, and optimal posting time. The tone should be [casual/professional/humorous]. Add 5 hashtag suggestions.'
-        }
-    },
-    {
-        id: 'freelancers',
-        title: 'Freelancers',
-        icon: '💻',
-        tagline: 'Win more clients, deliver faster',
-        benefits: [
-            'Write proposals that win projects',
-            'Create client deliverables faster',
-            'Set up professional workflows',
-            'Communicate clearly with clients'
-        ],
-        samplePrompt: {
-            title: 'Winning Proposal Template',
-            prompt: 'Act as a successful freelance consultant. Write a proposal for a [SERVICE TYPE] project. Include: personalized opening that references the client\'s specific needs, understanding of their problem, my proposed solution with clear deliverables, timeline breakdown, pricing with 3 tier options (basic/standard/premium), FAQs, and a soft close CTA. The tone should be confident but not arrogant. Format for easy scanning.'
-        }
-    }
-]
+import { AUDIENCE_DATA } from '../App'
 
 export default function AudienceSelector() {
-    const [selectedAudience, setSelectedAudience] = useState(audiences[0])
+    const [active, setActive] = useState(0)
+    const current = AUDIENCE_DATA[active]
 
     return (
-        <section id="audience" className="section-base section-alt">
-            <div className="section-container">
+        <section id="audience" className="section-spacing relative">
+            {/* Section ambient glow */}
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[400px] bg-violet-600/[0.04] rounded-full blur-[120px] pointer-events-none" />
+
+            <div className="container-main relative z-10">
                 {/* Section Header */}
                 <motion.div
                     initial={{ opacity: 0, y: 30 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
-                    transition={{ duration: 0.6 }}
-                    className="section-header"
+                    transition={{ type: 'spring', stiffness: 100, damping: 20 }}
+                    className="text-center mb-14"
                 >
-                    <h2>
-                        Built for <span className="gradient-text">Your Success</span>
+                    <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold tracking-[-0.03em] text-white mb-4">
+                        Built for <span className="text-gradient">everyone</span>
                     </h2>
-                    <p>
-                        Whether you're a student or a business owner, we have prompts tailored specifically for your needs.
+                    <p className="text-[#8b8ba3] text-lg max-w-xl mx-auto">
+                        See the difference a well-crafted prompt makes for your specific use case.
                     </p>
                 </motion.div>
 
-                {/* Audience Tabs */}
+                {/* Tab Buttons */}
                 <motion.div
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
-                    transition={{ duration: 0.5, delay: 0.1 }}
-                    className="flex flex-wrap justify-center gap-3 mb-12"
+                    transition={{ type: 'spring', stiffness: 100, damping: 20, delay: 0.1 }}
+                    className="flex flex-wrap justify-center gap-2 mb-12"
                 >
-                    {audiences.map((audience) => (
-                        <button
-                            key={audience.id}
-                            onClick={() => setSelectedAudience(audience)}
-                            className={`px-5 py-3 rounded-xl text-sm font-medium transition-all duration-300 ${selectedAudience.id === audience.id
-                                ? 'bg-gradient-to-r from-indigo-500 to-blue-500 text-white shadow-lg shadow-indigo-500/25'
-                                : 'bg-white/5 text-zinc-400 hover:bg-white/10 hover:text-white border border-white/5'
+                    {AUDIENCE_DATA.map((item, i) => (
+                        <motion.button
+                            key={item.id}
+                            onClick={() => setActive(i)}
+                            whileHover={{ scale: 1.04 }}
+                            whileTap={{ scale: 0.97 }}
+                            className={`relative px-5 py-2.5 rounded-xl text-sm font-medium transition-all duration-300 ${active === i
+                                    ? 'text-white'
+                                    : 'text-[#8b8ba3] hover:text-white hover:bg-white/[0.04]'
                                 }`}
                         >
-                            <span className="mr-2">{audience.icon}</span>
-                            {audience.title}
-                        </button>
+                            {active === i && (
+                                <motion.div
+                                    layoutId="activeTab"
+                                    className="absolute inset-0 bg-white/[0.08] border border-white/[0.1] rounded-xl"
+                                    transition={{ type: 'spring', stiffness: 400, damping: 30 }}
+                                />
+                            )}
+                            <span className="relative z-10 flex items-center gap-2">
+                                <span className="text-base">{item.icon}</span>
+                                {item.label}
+                            </span>
+                        </motion.button>
                     ))}
                 </motion.div>
 
-                {/* Content Display */}
+                {/* Before / After Content */}
                 <AnimatePresence mode="wait">
                     <motion.div
-                        key={selectedAudience.id}
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        exit={{ opacity: 0, y: -20 }}
-                        transition={{ duration: 0.4 }}
-                        className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto"
+                        key={current.id}
+                        initial={{ opacity: 0, y: 20, scale: 0.98 }}
+                        animate={{ opacity: 1, y: 0, scale: 1 }}
+                        exit={{ opacity: 0, y: -20, scale: 0.98 }}
+                        transition={{ type: 'spring', stiffness: 200, damping: 25 }}
+                        className="grid md:grid-cols-2 gap-6 max-w-5xl mx-auto"
                     >
-                        {/* Benefits Card */}
-                        <div className="glass-card p-8">
-                            <div className="flex items-center gap-4 mb-6">
-                                <span className="text-4xl">{selectedAudience.icon}</span>
-                                <div>
-                                    <h3 className="text-xl font-bold text-white">{selectedAudience.title}</h3>
-                                    <p className="text-zinc-400">{selectedAudience.tagline}</p>
+                        {/* Before Card */}
+                        <div className="glass-card p-6 md:p-8 rounded-2xl group">
+                            <div className="flex items-center gap-3 mb-5">
+                                <div className="w-8 h-8 rounded-lg bg-red-500/10 border border-red-500/20 flex items-center justify-center">
+                                    <span className="text-red-400 text-sm">✗</span>
                                 </div>
+                                <span className="text-sm font-semibold text-red-400/80 uppercase tracking-wider">
+                                    {current.before.title}
+                                </span>
                             </div>
-                            <ul className="space-y-4">
-                                {selectedAudience.benefits.map((benefit, index) => (
-                                    <motion.li
-                                        key={index}
-                                        initial={{ opacity: 0, x: -20 }}
-                                        animate={{ opacity: 1, x: 0 }}
-                                        transition={{ delay: index * 0.1 }}
-                                        className="flex items-start gap-3"
-                                    >
-                                        <svg className="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                                            <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
-                                        </svg>
-                                        <span className="text-zinc-300">{benefit}</span>
-                                    </motion.li>
-                                ))}
-                            </ul>
-                        </div>
-
-                        {/* Sample Prompt Card */}
-                        <div className="glass-card p-8 relative overflow-hidden">
-                            <div className="absolute top-4 right-4 px-3 py-1 bg-indigo-500/20 text-indigo-400 text-xs font-medium rounded-full">
-                                Sample Prompt
-                            </div>
-                            <h4 className="text-lg font-bold text-white mb-4 mt-2">{selectedAudience.samplePrompt.title}</h4>
-                            <div className="bg-black/30 rounded-lg p-4 border border-white/5">
-                                <p className="text-zinc-400 text-sm leading-relaxed font-mono">
-                                    {selectedAudience.samplePrompt.prompt}
+                            <div className="mb-5 p-4 rounded-xl bg-white/[0.02] border border-white/[0.04]">
+                                <p className="text-sm text-white/60 font-mono leading-relaxed">
+                                    "{current.before.prompt}"
                                 </p>
                             </div>
-                            <div className="mt-6 flex items-center gap-4">
-                                <a href="#pricing" className="btn-primary text-sm py-2.5 px-5">
-                                    Get All 300+ Prompts
-                                </a>
-                                <span className="text-zinc-500 text-sm">Just ₹299</span>
+                            <p className="text-sm text-[#8b8ba3] leading-relaxed">
+                                {current.before.result}
+                            </p>
+                        </div>
+
+                        {/* After Card */}
+                        <div className="glass-card p-6 md:p-8 rounded-2xl border-indigo-500/20 relative overflow-hidden group">
+                            {/* Glow effect */}
+                            <div className="absolute top-0 right-0 w-32 h-32 bg-indigo-500/10 rounded-full blur-[60px] pointer-events-none" />
+
+                            <div className="relative z-10">
+                                <div className="flex items-center gap-3 mb-5">
+                                    <div className="w-8 h-8 rounded-lg bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center">
+                                        <span className="text-emerald-400 text-sm">✓</span>
+                                    </div>
+                                    <span className="text-sm font-semibold text-emerald-400/80 uppercase tracking-wider">
+                                        {current.after.title}
+                                    </span>
+                                </div>
+                                <div className="mb-5 p-4 rounded-xl bg-white/[0.02] border border-indigo-500/10">
+                                    <p className="text-sm text-white/70 font-mono leading-relaxed">
+                                        "{current.after.prompt}"
+                                    </p>
+                                </div>
+                                <p className="text-sm text-[#c0c0d0] leading-relaxed font-medium">
+                                    {current.after.result}
+                                </p>
                             </div>
                         </div>
                     </motion.div>

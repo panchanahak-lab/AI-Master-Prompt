@@ -1,137 +1,111 @@
 import { motion } from 'framer-motion'
-
-/**
- * Pricing Component
- * - Single premium pricing card
- * - Glassmorphism with gradient border
- * - ₹299 prominent display
- * - Feature list with checkmarks
- * - Glowing CTA button
- */
-
-const features = [
-    '300+ ready-to-use AI prompts',
-    'Prompts for 5 different audiences',
-    'Works with ChatGPT, Gemini, Claude',
-    'Detailed usage instructions included',
-    'Instant PDF download',
-    'Lifetime access – no subscription',
-    'Free future updates',
-    'Copy-paste ready format'
-]
+import { ArrowRight, ShieldCheck, Download, Clock } from 'lucide-react'
 
 export default function Pricing() {
-    // Replace this URL with your actual Razorpay payment link or WhatsApp checkout
-    const paymentLink = 'https://rzp.io/l/ai-master-prompt' // Example Razorpay link
-
     return (
-        <section id="pricing" className="section-base section-dark relative overflow-hidden">
-            {/* Background Gradient Orbs */}
-            <div className="absolute inset-0 overflow-hidden pointer-events-none">
-                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-violet-500/10 rounded-full blur-3xl" />
-            </div>
+        <section id="pricing" className="section-spacing relative">
+            {/* Ambient glow */}
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[500px] bg-indigo-600/[0.06] rounded-full blur-[140px] pointer-events-none" />
 
-            <div className="section-container relative z-10">
+            <div className="container-main relative z-10">
                 {/* Section Header */}
                 <motion.div
                     initial={{ opacity: 0, y: 30 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
-                    transition={{ duration: 0.6 }}
-                    className="section-header"
+                    transition={{ type: 'spring', stiffness: 100, damping: 20 }}
+                    className="text-center mb-14"
                 >
-                    <h2>
-                        One Price. <span className="gradient-text">Unlimited Value.</span>
+                    <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold tracking-[-0.03em] text-white mb-4">
+                        One price. <span className="text-gradient">Lifetime value.</span>
                     </h2>
-                    <p>
-                        No subscriptions. No hidden fees. Pay once, use forever.
+                    <p className="text-[#8b8ba3] text-lg max-w-xl mx-auto">
+                        No subscriptions. No hidden fees. Just pure value.
                     </p>
                 </motion.div>
 
                 {/* Pricing Card */}
                 <motion.div
-                    initial={{ opacity: 0, y: 30, scale: 0.95 }}
+                    initial={{ opacity: 0, y: 40, scale: 0.95 }}
                     whileInView={{ opacity: 1, y: 0, scale: 1 }}
                     viewport={{ once: true }}
-                    transition={{ duration: 0.6 }}
+                    transition={{ type: 'spring', stiffness: 100, damping: 20, delay: 0.1 }}
                     className="max-w-md mx-auto"
                 >
-                    {/* Card with Gradient Border */}
-                    <div className="relative group">
-                        {/* Animated Gradient Border */}
-                        <div className="absolute -inset-0.5 bg-gradient-to-r from-indigo-500 via-blue-500 to-indigo-500 rounded-2xl opacity-30 group-hover:opacity-60 blur transition duration-500" />
+                    <div className="glass-card rounded-3xl p-8 md:p-10 relative overflow-hidden">
+                        {/* Corner glow */}
+                        <div className="absolute -top-20 -right-20 w-40 h-40 bg-indigo-500/20 rounded-full blur-[60px] pointer-events-none" />
+                        <div className="absolute -bottom-20 -left-20 w-40 h-40 bg-violet-500/15 rounded-full blur-[60px] pointer-events-none" />
 
-                        {/* Card Content */}
-                        <div className="relative bg-[#020617] rounded-2xl p-8 md:p-10 border border-white/5">
+                        <div className="relative z-10">
                             {/* Badge */}
-                            <div className="flex justify-center mb-6">
-                                <span className="px-4 py-1.5 bg-gradient-to-r from-violet-500/20 to-blue-500/20 text-violet-400 text-sm font-medium rounded-full border border-violet-500/30">
+                            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-indigo-500/10 border border-indigo-500/20 mb-6">
+                                <span className="text-xs font-semibold text-indigo-400 uppercase tracking-wider">
                                     Most Popular
                                 </span>
                             </div>
 
-                            {/* Product Name */}
-                            <h3 className="text-xl font-bold text-white text-center mb-2">
-                                AI Master Prompt Pack
-                            </h3>
-                            <p className="text-zinc-400 text-center mb-6">
-                                Everything you need to master AI
-                            </p>
+                            {/* Title */}
+                            <h3 className="text-2xl font-bold text-white mb-2">AI Master Prompt Pack</h3>
+                            <p className="text-sm text-[#8b8ba3] mb-8">300+ ready-to-use prompts for every use case.</p>
 
                             {/* Price */}
-                            <div className="text-center mb-8">
-                                <div className="flex items-center justify-center gap-2">
-                                    <span className="text-zinc-500 text-2xl line-through">₹999</span>
-                                    <span className="text-5xl md:text-6xl font-bold text-white">₹299</span>
+                            <div className="flex items-baseline gap-2 mb-8">
+                                <span className="text-6xl md:text-7xl font-extrabold tracking-[-0.04em] text-white">₹299</span>
+                                <div className="flex flex-col">
+                                    <span className="text-sm text-[#55556a] line-through">₹999</span>
+                                    <span className="text-xs font-semibold text-emerald-400">70% OFF</span>
                                 </div>
-                                <p className="text-green-400 text-sm mt-2">Save ₹700 – Limited Time Offer</p>
                             </div>
 
-                            {/* Features */}
-                            <ul className="space-y-4 mb-8">
-                                {features.map((feature, index) => (
-                                    <li key={index} className="flex items-start gap-3">
-                                        <svg className="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                                            <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
-                                        </svg>
-                                        <span className="text-zinc-300">{feature}</span>
+                            {/* Feature List */}
+                            <ul className="space-y-3 mb-8">
+                                {[
+                                    '300+ professionally crafted prompts',
+                                    'Organized by 15+ categories',
+                                    'Works with ChatGPT, Gemini, Claude',
+                                    'Lifetime updates included',
+                                    'Instant PDF download',
+                                    'Copy-paste ready format',
+                                ].map((feature) => (
+                                    <li key={feature} className="flex items-center gap-3 text-sm text-[#c0c0d0]">
+                                        <div className="w-5 h-5 rounded-full bg-indigo-500/10 border border-indigo-500/20 flex items-center justify-center flex-shrink-0">
+                                            <svg className="w-3 h-3 text-indigo-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3}>
+                                                <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+                                            </svg>
+                                        </div>
+                                        {feature}
                                     </li>
                                 ))}
                             </ul>
 
                             {/* CTA Button */}
-                            <a
-                                href={paymentLink}
+                            <motion.a
+                                href="https://example.com/buy"
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                className="btn-primary w-full text-lg py-4 text-center block"
+                                whileHover={{ scale: 1.03 }}
+                                whileTap={{ scale: 0.97 }}
+                                className="btn-glow w-full flex items-center justify-center gap-2.5 bg-gradient-to-r from-indigo-500 via-violet-500 to-purple-500 text-white font-bold text-base py-4 rounded-2xl shadow-xl shadow-indigo-500/30"
                             >
-                                Buy Now – ₹299
-                            </a>
+                                Get Instant Access
+                                <ArrowRight className="w-4 h-4" />
+                            </motion.a>
 
-                            {/* Trust Text */}
-                            <p className="text-zinc-500 text-xs text-center mt-4">
-                                Secure payment via Razorpay. Instant download after payment.
-                            </p>
+                            {/* Trust Signals */}
+                            <div className="mt-6 pt-6 border-t border-white/[0.06] flex flex-wrap justify-center gap-4">
+                                {[
+                                    { icon: ShieldCheck, text: '100% Secure Payment' },
+                                    { icon: Download, text: 'Instant PDF Download' },
+                                    { icon: Clock, text: 'Lifetime Access' },
+                                ].map(({ icon: Icon, text }) => (
+                                    <div key={text} className="flex items-center gap-1.5 text-[11px] font-medium text-[#55556a]">
+                                        <Icon className="w-3.5 h-3.5" />
+                                        {text}
+                                    </div>
+                                ))}
+                            </div>
                         </div>
-                    </div>
-                </motion.div>
-
-                {/* Payment Methods */}
-                <motion.div
-                    initial={{ opacity: 0 }}
-                    whileInView={{ opacity: 1 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.5, delay: 0.3 }}
-                    className="flex flex-wrap justify-center items-center gap-4 md:gap-6 mt-10 text-zinc-500 text-sm"
-                >
-                    <span>Accepted:</span>
-                    <div className="flex items-center gap-4">
-                        <span>UPI</span>
-                        <span className="text-zinc-700">•</span>
-                        <span>Cards</span>
-                        <span className="text-zinc-700">•</span>
-                        <span>Net Banking</span>
                     </div>
                 </motion.div>
             </div>
