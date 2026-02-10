@@ -2,8 +2,8 @@
 @import "tailwindcss";
 
 /* ===================================
-   AI MASTER PROMPT — Glassmorphism v2 + Bento
-   Award-Winning Dark Mode Design System
+   AI MASTER PROMPT — Premium Visual Polish
+   Rich Dark + Glassmorphism + Spring Physics
    =================================== */
 
 /* Typography — Inter (Editorial Precision) */
@@ -11,18 +11,18 @@
 
 /* === CSS Custom Properties === */
 :root {
-  --bg-base: #06060b;
-  --bg-surface: #0c0c14;
-  --bg-elevated: #12121e;
-  --bg-card: rgba(255, 255, 255, 0.025);
-  --bg-card-hover: rgba(255, 255, 255, 0.05);
+  --bg-base: #030712;
+  --bg-surface: #0a0f1e;
+  --bg-elevated: #111827;
+  --bg-card: rgba(255, 255, 255, 0.05);
+  --bg-card-hover: rgba(255, 255, 255, 0.08);
 
-  --text-primary: #f0f0f5;
-  --text-secondary: #8b8ba3;
-  --text-muted: #55556a;
+  --text-primary: #f1f5f9;
+  --text-secondary: #94a3b8;
+  --text-muted: #475569;
 
-  --border-subtle: rgba(255, 255, 255, 0.06);
-  --border-hover: rgba(255, 255, 255, 0.12);
+  --border-subtle: rgba(255, 255, 255, 0.1);
+  --border-hover: rgba(255, 255, 255, 0.18);
 
   --accent-indigo: #6366f1;
   --accent-violet: #8b5cf6;
@@ -55,7 +55,7 @@ body {
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
   background-color: var(--bg-base);
   color: var(--text-primary);
-  line-height: 1.6;
+  line-height: 1.7;
   overflow-x: hidden;
 }
 
@@ -66,16 +66,15 @@ body::before {
   inset: 0;
   z-index: 9999;
   pointer-events: none;
-  opacity: 0.025;
+  opacity: 0.03;
   background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
   background-repeat: repeat;
   background-size: 128px 128px;
 }
 
-/* === Container === */
+/* === Container (max-w-7xl mx-auto px-6) === */
 .container-main {
   max-width: 80rem;
-  /* max-w-7xl = 1280px */
   margin: 0 auto;
   padding: 0 1.5rem;
 }
@@ -98,8 +97,8 @@ body::before {
 /* === Glass Card Base === */
 .glass-card {
   background: var(--bg-card);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
   border: 1px solid var(--border-subtle);
   border-radius: var(--radius-2xl);
   position: relative;
@@ -113,10 +112,10 @@ body::before {
   border-radius: inherit;
   padding: 1px;
   background: linear-gradient(135deg,
-      rgba(255, 255, 255, 0.08) 0%,
+      rgba(255, 255, 255, 0.1) 0%,
       transparent 40%,
       transparent 60%,
-      rgba(255, 255, 255, 0.04) 100%);
+      rgba(255, 255, 255, 0.05) 100%);
   -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
   mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
   -webkit-mask-composite: xor;
@@ -134,30 +133,30 @@ body::before {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #1e1e2e;
+  background: #1e293b;
   border-radius: 3px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #2e2e42;
+  background: #334155;
 }
 
 /* === Selection === */
 ::selection {
-  background: rgba(99, 102, 241, 0.3);
+  background: rgba(99, 102, 241, 0.35);
   color: #fff;
 }
 
-/* === Section Spacing === */
+/* === Section Spacing (STRICT RHYTHM: py-16 mobile / py-24 desktop) === */
 .section-spacing {
-  padding-top: 5rem;
-  padding-bottom: 5rem;
+  padding-top: 4rem;
+  padding-bottom: 4rem;
 }
 
 @media (min-width: 768px) {
   .section-spacing {
-    padding-top: 8rem;
-    padding-bottom: 8rem;
+    padding-top: 6rem;
+    padding-bottom: 6rem;
   }
 }
 
@@ -178,6 +177,41 @@ body::before {
   animation: breathe 3s ease-in-out infinite;
 }
 
+/* === Button Shine Hover Effect === */
+@keyframes shine {
+  0% {
+    left: -100%;
+  }
+
+  100% {
+    left: 200%;
+  }
+}
+
+.btn-shine {
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-shine::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(90deg,
+      transparent,
+      rgba(255, 255, 255, 0.15),
+      transparent);
+  transition: none;
+  pointer-events: none;
+}
+
+.btn-shine:hover::after {
+  animation: shine 0.6s ease-in-out;
+}
+
 /* === Floating Animation === */
 @keyframes float {
 
@@ -187,11 +221,11 @@ body::before {
   }
 
   33% {
-    transform: translateY(-8px) rotate(1deg);
+    transform: translateY(-10px) rotate(1deg);
   }
 
   66% {
-    transform: translateY(-4px) rotate(-0.5deg);
+    transform: translateY(-5px) rotate(-0.5deg);
   }
 }
 

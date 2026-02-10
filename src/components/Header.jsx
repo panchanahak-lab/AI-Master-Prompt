@@ -23,9 +23,9 @@ export default function Header() {
         <motion.header
             initial={{ y: -100 }}
             animate={{ y: 0 }}
-            transition={{ type: 'spring', stiffness: 100, damping: 20 }}
+            transition={{ type: 'spring', stiffness: 260, damping: 20 }}
             className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${isScrolled
-                    ? 'bg-[#06060b]/70 backdrop-blur-2xl border-b border-white/[0.06] py-3'
+                    ? 'bg-white/5 backdrop-blur-xl border-b border-white/10 py-3'
                     : 'bg-transparent py-5'
                 }`}
         >
@@ -33,7 +33,7 @@ export default function Header() {
                 <nav className="flex items-center justify-between">
                     {/* Logo */}
                     <a href="#" className="flex items-center gap-2.5 group">
-                        <div className="w-8 h-8 rounded-xl bg-gradient-to-br from-indigo-500 to-violet-600 flex items-center justify-center shadow-lg shadow-indigo-500/20 group-hover:shadow-indigo-500/40 transition-shadow">
+                        <div className="w-8 h-8 rounded-xl bg-gradient-to-br from-indigo-500 to-violet-600 flex items-center justify-center shadow-lg shadow-indigo-500/25 group-hover:shadow-indigo-500/40 transition-shadow duration-300">
                             <Sparkles className="w-4 h-4 text-white" />
                         </div>
                         <span className="text-[15px] font-semibold text-white tracking-tight">
@@ -47,7 +47,7 @@ export default function Header() {
                             <a
                                 key={link.href}
                                 href={link.href}
-                                className="text-[13px] font-medium text-[#8b8ba3] hover:text-white px-4 py-2 rounded-lg hover:bg-white/[0.04] transition-all duration-200"
+                                className="text-[13px] font-medium text-slate-400 hover:text-white px-4 py-2 rounded-lg hover:bg-white/5 transition-all duration-200"
                             >
                                 {link.label}
                             </a>
@@ -58,9 +58,9 @@ export default function Header() {
                     <div className="hidden md:block">
                         <motion.a
                             href="#pricing"
-                            whileHover={{ scale: 1.03 }}
-                            whileTap={{ scale: 0.98 }}
-                            className="inline-flex items-center gap-2 text-[13px] font-semibold bg-gradient-to-r from-indigo-500 to-violet-600 text-white px-5 py-2.5 rounded-xl shadow-lg shadow-indigo-500/25 hover:shadow-indigo-500/40 transition-shadow"
+                            whileHover={{ scale: 1.05 }}
+                            whileTap={{ scale: 0.95 }}
+                            className="btn-shine inline-flex items-center gap-2 text-[13px] font-semibold bg-gradient-to-r from-indigo-500 to-violet-600 text-white px-5 py-2.5 rounded-xl shadow-lg shadow-indigo-500/25 hover:shadow-indigo-500/40 transition-shadow duration-300"
                         >
                             Get Access
                             <span className="text-white/60 text-xs">₹299</span>
@@ -70,7 +70,7 @@ export default function Header() {
                     {/* Mobile Toggle */}
                     <button
                         onClick={() => setIsMobileOpen(!isMobileOpen)}
-                        className="md:hidden p-2 text-[#8b8ba3] hover:text-white transition-colors"
+                        className="md:hidden p-2 text-slate-400 hover:text-white transition-colors"
                     >
                         {isMobileOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
                     </button>
@@ -83,16 +83,16 @@ export default function Header() {
                             initial={{ opacity: 0, height: 0 }}
                             animate={{ opacity: 1, height: 'auto' }}
                             exit={{ opacity: 0, height: 0 }}
-                            transition={{ type: 'spring', stiffness: 300, damping: 30 }}
+                            transition={{ type: 'spring', stiffness: 260, damping: 20 }}
                             className="md:hidden overflow-hidden"
                         >
-                            <div className="pt-4 pb-6 flex flex-col gap-1 border-t border-white/[0.06] mt-3">
+                            <div className="pt-4 pb-6 flex flex-col gap-1 border-t border-white/10 mt-3">
                                 {links.map((link) => (
                                     <a
                                         key={link.href}
                                         href={link.href}
                                         onClick={() => setIsMobileOpen(false)}
-                                        className="text-sm text-[#8b8ba3] hover:text-white py-2.5 px-3 rounded-lg hover:bg-white/[0.04] transition-all"
+                                        className="text-sm text-slate-400 hover:text-white py-2.5 px-3 rounded-lg hover:bg-white/5 transition-all"
                                     >
                                         {link.label}
                                     </a>

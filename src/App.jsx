@@ -120,7 +120,10 @@ export const PROMPT_EXAMPLES = [
 
 function App() {
   return (
-    <div className="min-h-screen bg-[#06060b] relative">
+    <div className="min-h-screen bg-[#030712] relative">
+      {/* Fixed radial gradient background — rich depth */}
+      <div className="fixed inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-indigo-900/20 via-slate-950 to-slate-950 -z-10" />
+
       <Header />
       <Hero />
       <AudienceSelector />
