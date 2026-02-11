@@ -1,5 +1,6 @@
 import Header from './components/Header'
 import Hero from './components/Hero'
+import Audience from './components/Audience'
 import BentoGrid from './components/BentoGrid'
 import Pricing from './components/Pricing'
 import FAQ from './components/FAQ'
@@ -10,6 +11,7 @@ function App() {
     <div className="min-h-screen bg-[#000000] text-white font-mono selection:bg-[#00FF00] selection:text-black">
       <Header />
       <Hero />
+      <Audience />
       <BentoGrid />
       <Pricing />
       <FAQ />
