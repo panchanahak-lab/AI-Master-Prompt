@@ -19,7 +19,7 @@ const Hero = () => {
     }, [])
 
     return (
-        <section id="intro" className="pt-48 pb-20 container-main mx-auto min-h-screen grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
+        <section id="intro" className="pt-64 pb-20 container-main mx-auto min-h-screen grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
 
             {/* LEFT: TERMINAL DISPLAY */}
             <motion.div
