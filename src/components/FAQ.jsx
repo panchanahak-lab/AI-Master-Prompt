@@ -1,84 +1,75 @@
-import { useState } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
-import { ChevronDown } from 'lucide-react'
-import { FAQ_DATA } from '../App'
+import React, { useState } from 'react'
 
-function FAQItem({ question, answer, isOpen, onClick }) {
-    return (
-        <div className="border-b border-white/[0.08] last:border-b-0">
-            <button
-                onClick={onClick}
-                className="w-full flex items-center justify-between gap-4 py-6 text-left group"
-            >
-                <span className={`text-base font-medium transition-colors duration-200 ${isOpen ? 'text-white' : 'text-slate-300 group-hover:text-white'}`}>
-                    {question}
-                </span>
-                <motion.div
-                    animate={{ rotate: isOpen ? 180 : 0 }}
-                    transition={{ type: 'spring', stiffness: 260, damping: 20 }}
-                    className="flex-shrink-0"
-                >
-                    <ChevronDown className={`w-4 h-4 transition-colors duration-200 ${isOpen ? 'text-indigo-400' : 'text-slate-500'}`} />
-                </motion.div>
-            </button>
-            <AnimatePresence initial={false}>
-                {isOpen && (
-                    <motion.div
-                        initial={{ height: 0, opacity: 0 }}
-                        animate={{ height: 'auto', opacity: 1 }}
-                        exit={{ height: 0, opacity: 0 }}
-                        transition={{ type: 'spring', stiffness: 260, damping: 20 }}
-                        className="overflow-hidden"
-                    >
-                        <p className="pb-6 text-sm text-slate-400 leading-relaxed max-w-2xl">
-                            {answer}
-                        </p>
-                    </motion.div>
-                )}
-            </AnimatePresence>
-        </div>
-    )
-}
+const FAQ_ITEMS = [
+    {
+        q: "WHAT'S THE TECHNICAL ADVANTAGE?",
+        a: "Direct API injection capability. No middleware. Pure prompt engineering that leverages the raw token capabilities of GPT-4 and Claude 3.5."
+    },
+    {
+        q: "HOW IS MASTER PROMPT ENGINEERED?",
+        a: "Reverse-engineered from 10,000+ successful outputs. We decomplied superior responses to find the structural triggers that cause them."
+    },
+    {
+        q: "COMPATIBILITY_CHECK // SYSTEM_REQ",
+        a: "Works natively with: ChatGPT (Free/Plus), Claude (Opus/Sonnet), Google Gemini (Pro/Adv), and local LLMs (Llama 3, Mistral)."
+    },
+    {
+        q: "UPDATES_POLICY // LIFETIME_ACCESS",
+        a: "One-time payment grants database access forever. New prompt injections are pushed to the repository weekly."
+    }
+]
 
-export default function FAQ() {
-    const [openIndex, setOpenIndex] = useState(0)
+const FAQ = () => {
+    const [openIndex, setOpenIndex] = useState(null)
+
+    const toggle = (idx) => {
+        setOpenIndex(openIndex === idx ? null : idx)
+    }
 
     return (
-        <section id="faq" className="section-spacing relative">
-            <div className="container-main relative z-10">
-                <motion.div
-                    initial={{ opacity: 0, y: 40 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ type: 'spring', stiffness: 260, damping: 20 }}
-                    className="text-center mb-16"
-                >
-                    <h2 className="text-3xl md:text-5xl font-bold tracking-[-0.05em] text-white mb-5">
-                        Frequently asked <span className="text-gradient">questions</span>
+        <section id="faq" className="py-20 bg-black border-t border-[#333333]">
+            <div className="container-main mx-auto max-w-3xl">
+
+                {/* Header */}
+                <div className="mb-12 border-b border-[#333333] pb-4">
+                    <h2 className="text-[#00FF00] font-mono text-xl uppercase tracking-wider">
+                        FAQ_TERMINAL // QUERY_DATABASE
                     </h2>
-                    <p className="text-slate-400 text-lg leading-relaxed max-w-xl mx-auto">
-                        Got questions? We've got answers.
-                    </p>
-                </motion.div>
+                </div>
 
-                <motion.div
-                    initial={{ opacity: 0, y: 40 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ type: 'spring', stiffness: 260, damping: 20, delay: 0.1 }}
-                    className="max-w-2xl mx-auto glass-card rounded-3xl px-7 md:px-9"
-                >
-                    {FAQ_DATA.map((item, i) => (
-                        <FAQItem
-                            key={i}
-                            question={item.q}
-                            answer={item.a}
-                            isOpen={openIndex === i}
-                            onClick={() => setOpenIndex(openIndex === i ? -1 : i)}
-                        />
+                {/* Accordion */}
+                <div className="space-y-4">
+                    {FAQ_ITEMS.map((item, idx) => (
+                        <div key={idx} className="border border-[#333333] bg-[#050505] transition-all hover:border-gray-700">
+
+                            <button
+                                onClick={() => toggle(idx)}
+                                className="w-full text-left px-6 py-4 flex items-center justify-between group"
+                            >
+                                <span className={`font-mono uppercase text-sm font-bold tracking-wider ${openIndex === idx ? 'text-[#00FF00]' : 'text-gray-300 group-hover:text-white'}`}>
+                                    {item.q}
+                                </span>
+                                <span className="text-[#00FF00] font-mono">
+                                    {openIndex === idx ? '[-]' : '[+]'}
+                                </span>
+                            </button>
+
+                            {openIndex === idx && (
+                                <div className="px-6 pb-6 pt-2 border-t border-[#333333] bg-[#111111]">
+                                    <div className="font-mono text-sm text-gray-400 leading-relaxed">
+                                        <span className="text-[#00FF00] mr-2">&gt;</span>
+                                        {item.a}
+                                    </div>
+                                </div>
+                            )}
+
+                        </div>
                     ))}
-                </motion.div>
+                </div>
+
             </div>
         </section>
     )
 }
+
+export default FAQ

@@ -1,194 +1,115 @@
+import React, { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
-import { useState, useEffect, useCallback } from 'react'
-import { ArrowRight, Download, Zap, Globe } from 'lucide-react'
-import { PROMPT_EXAMPLES } from '../App'
 
-const cardVariants = {
-    enter: { opacity: 0, y: 40, scale: 0.92, rotateX: -8 },
-    center: { opacity: 1, y: 0, scale: 1, rotateX: 0 },
-    exit: { opacity: 0, y: -40, scale: 0.92, rotateX: 8 },
-}
-
-function FloatingCardStack() {
-    const [current, setCurrent] = useState(0)
-
-    const nextCard = useCallback(() => {
-        setCurrent((c) => (c + 1) % PROMPT_EXAMPLES.length)
-    }, [])
+const Hero = () => {
+    const [typedText, setTypedText] = useState('')
+    const promptText = "Act as a Senior Prompt Engineer. Generate a robust system prompt for..."
 
     useEffect(() => {
-        const timer = setInterval(nextCard, 3500)
-        return () => clearInterval(timer)
-    }, [nextCard])
+        let index = 0
+        const interval = setInterval(() => {
+            if (index < promptText.length) {
+                setTypedText((prev) => prev + promptText.charAt(index))
+                index++
+            } else {
+                clearInterval(interval)
+            }
+        }, 50)
+        return () => clearInterval(interval)
+    }, [])
 
     return (
-        <div className="relative w-full max-w-sm mx-auto h-[280px] perspective-[1200px]">
-            {/* Background decorative cards */}
-            <div className="absolute inset-x-5 top-5 bottom-0 rounded-2xl bg-white/[0.02] border border-white/[0.05]" />
-            <div className="absolute inset-x-2.5 top-2.5 bottom-0 rounded-2xl bg-white/[0.03] border border-white/[0.07]" />
+        <section id="intro" className="pt-32 pb-20 container-main mx-auto min-h-screen grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
 
-            {/* Active card */}
+            {/* LEFT: TERMINAL DISPLAY */}
             <motion.div
-                key={current}
-                variants={cardVariants}
-                initial="enter"
-                animate="center"
-                exit="exit"
-                transition={{ type: 'spring', stiffness: 260, damping: 20 }}
-                className="absolute inset-0 glass-card p-7 rounded-2xl"
+                initial={{ opacity: 0, x: -20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.5 }}
+                className="border border-[#00FF00] p-1 bg-black h-full flex flex-col min-h-[500px]"
             >
-                <div className={`inline-flex px-3 py-1.5 rounded-full text-xs font-semibold bg-gradient-to-r ${PROMPT_EXAMPLES[current].color} text-white/90 mb-5 border border-white/10`}>
-                    {PROMPT_EXAMPLES[current].category}
+                {/* Terminal Header */}
+                <div className="bg-[#00FF00] text-black text-xs font-bold px-2 py-1 uppercase mb-4">
+                    PROMPT_ENGINEER_TERMINAL
                 </div>
-                <p className="text-[13px] text-slate-300 leading-relaxed font-mono">
-                    "{PROMPT_EXAMPLES[current].prompt}"
-                </p>
-                <div className="absolute bottom-7 left-7 right-7 flex items-center gap-2">
-                    <div className="flex gap-1.5">
-                        {[0, 1, 2].map((i) => (
-                            <div
-                                key={i}
-                                className={`w-2 h-2 rounded-full transition-all duration-500 ${i === current ? 'bg-indigo-400 scale-125 shadow-[0_0_8px_rgba(99,102,241,0.6)]' : 'bg-white/20'
-                                    }`}
-                            />
-                        ))}
+
+                {/* Terminal Content */}
+                <div className="flex-grow p-4 font-mono text-sm space-y-8">
+
+                    {/* Input Block */}
+                    <div>
+                        <div className="text-gray-500 mb-2 uppercase text-xs border-b border-gray-800 pb-1">
+                            BEFORE_AI_MASTER_PROMPT
+                        </div>
+                        <div className="text-gray-400">
+                            <span className="text-[#00FF00] mr-2">&gt;</span>
+                            Enter your prompt...
+                            <br />
+                            <span className="opacity-50">[Raw Input Example]</span>
+                        </div>
                     </div>
-                    <span className="text-[11px] text-white/30 ml-2">
-                        {current + 1}/{PROMPT_EXAMPLES.length}
-                    </span>
+
+                    {/* Output Block */}
+                    <div className="mt-8">
+                        <div className="text-gray-500 mb-2 uppercase text-xs border-b border-gray-800 pb-1">
+                            AFTER_AI_MASTER_PROMPT
+                        </div>
+                        <div className="text-[#00FF00] leading-relaxed">
+                            <span className="mr-2">&gt;</span>
+                            {typedText}
+                            <span className="animate-pulse inline-block w-2 h-4 bg-[#00FF00] ml-1 align-middle"></span>
+                        </div>
+                    </div>
+
                 </div>
             </motion.div>
-        </div>
-    )
-}
 
-export default function Hero() {
-    const [count, setCount] = useState(0)
-
-    useEffect(() => {
-        let start = 0
-        const end = 300
-        const duration = 2000
-        const step = end / (duration / 16)
-        const timer = setInterval(() => {
-            start += step
-            if (start >= end) {
-                setCount(end)
-                clearInterval(timer)
-            } else {
-                setCount(Math.floor(start))
-            }
-        }, 16)
-        return () => clearInterval(timer)
-    }, [])
-
-    const stagger = {
-        hidden: {},
-        show: {
-            transition: { staggerChildren: 0.15, delayChildren: 0.1 },
-        },
-    }
-
-    const fadeUp = {
-        hidden: { opacity: 0, y: 40 },
-        show: { opacity: 1, y: 0, transition: { type: 'spring', stiffness: 260, damping: 20 } },
-    }
-
-    return (
-        <section className="relative min-h-screen flex items-center pt-32 pb-16 md:pb-24 overflow-hidden">
-            {/* Ambient glow background */}
-            <div className="absolute inset-0 pointer-events-none">
-                <div className="absolute top-[15%] left-[20%] w-[700px] h-[700px] bg-indigo-600/[0.08] rounded-full blur-[150px]" />
-                <div className="absolute bottom-[20%] right-[15%] w-[600px] h-[600px] bg-violet-600/[0.06] rounded-full blur-[150px]" />
-                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[900px] h-[900px] bg-blue-600/[0.03] rounded-full blur-[180px]" />
-            </div>
-
-            <div className="container-main relative z-10">
-                <div className="grid lg:grid-cols-2 gap-16 lg:gap-24 items-center">
-                    {/* Left — Copy */}
-                    <motion.div
-                        variants={stagger}
-                        initial="hidden"
-                        animate="show"
-                    >
-                        {/* Badge */}
-                        <motion.div variants={fadeUp} className="mb-10">
-                            <div className="inline-flex items-center gap-2.5 px-4 py-2 rounded-full bg-white/5 border border-white/10 backdrop-blur-xl">
-                                <div className="w-2 h-2 rounded-full bg-emerald-400 shadow-[0_0_12px_rgba(52,211,153,0.6)]" />
-                                <span className="text-xs font-medium text-slate-400 tracking-wide uppercase">
-                                    {count}+ Prompts Included
-                                </span>
-                            </div>
-                        </motion.div>
-
-                        {/* Headline — MASSIVE */}
-                        <motion.h1 variants={fadeUp} className="mb-8">
-                            <span className="block text-5xl md:text-7xl font-bold tracking-[-0.05em] leading-[1.05] text-white">
-                                Master AI.
-                            </span>
-                            <span className="block text-5xl md:text-7xl font-bold tracking-[-0.05em] leading-[1.05] text-white">
-                                Work Faster.
-                            </span>
-                            <span className="block text-5xl md:text-7xl font-bold tracking-[-0.05em] leading-[1.05] text-gradient">
-                                Save Hours.
-                            </span>
-                        </motion.h1>
-
-                        {/* Subtitle */}
-                        <motion.p variants={fadeUp} className="text-lg md:text-xl text-slate-400 max-w-lg leading-relaxed mb-12">
-                            The ultimate prompt pack for Students, Creators, and Businesses.{' '}
-                            <span className="text-white font-medium">300+ Prompts. ₹299.</span>
-                        </motion.p>
-
-                        {/* CTA Buttons */}
-                        <motion.div variants={fadeUp} className="flex flex-col sm:flex-row gap-4 mb-14">
-                            <motion.a
-                                href="#pricing"
-                                whileHover={{ scale: 1.05 }}
-                                whileTap={{ scale: 0.95 }}
-                                className="btn-glow btn-shine inline-flex items-center justify-center gap-2.5 bg-gradient-to-r from-indigo-500 via-violet-500 to-purple-500 text-white font-semibold text-base px-8 py-4 rounded-2xl shadow-2xl shadow-indigo-500/30"
-                            >
-                                Buy Now — ₹299
-                                <ArrowRight className="w-4 h-4" />
-                            </motion.a>
-                            <motion.a
-                                href="#features"
-                                whileHover={{ scale: 1.03 }}
-                                whileTap={{ scale: 0.97 }}
-                                className="inline-flex items-center justify-center gap-2 text-base font-medium text-slate-400 px-8 py-4 rounded-2xl border border-white/10 hover:border-white/20 hover:text-white hover:bg-white/5 transition-all duration-300"
-                            >
-                                See What's Inside
-                            </motion.a>
-                        </motion.div>
-
-                        {/* Trust Badges */}
-                        <motion.div variants={fadeUp} className="flex flex-wrap gap-6">
-                            {[
-                                { icon: Download, text: 'Instant PDF Download' },
-                                { icon: Globe, text: 'Works with Free AI' },
-                                { icon: Zap, text: 'Lifetime Access' },
-                            ].map(({ icon: Icon, text }) => (
-                                <div key={text} className="flex items-center gap-2 text-xs font-medium text-slate-500 uppercase tracking-wider">
-                                    <Icon className="w-3.5 h-3.5" />
-                                    {text}
-                                </div>
-                            ))}
-                        </motion.div>
-                    </motion.div>
-
-                    {/* Right — Floating Card Stack */}
-                    <motion.div
-                        initial={{ opacity: 0, scale: 0.85, x: 60 }}
-                        animate={{ opacity: 1, scale: 1, x: 0 }}
-                        transition={{ type: 'spring', stiffness: 260, damping: 20, delay: 0.5 }}
-                        className="hidden lg:block"
-                    >
-                        <div className="animate-float">
-                            <FloatingCardStack />
-                        </div>
-                    </motion.div>
+            {/* RIGHT: HEADLINE & CONTENT */}
+            <motion.div
+                initial={{ opacity: 0, x: 20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.5, delay: 0.2 }}
+                className="flex flex-col justify-center h-full"
+            >
+                <div className="text-gray-500 text-sm mb-4 uppercase tracking-widest">
+                    AI MASTER PROMPT v2.0
                 </div>
-            </div>
+
+                <h1 className="text-5xl md:text-7xl font-bold uppercase leading-none mb-8 text-white">
+                    RAW AI POWER.<br />
+                    IMMEDIATE<br />
+                    OUTPUT.<br />
+                    ZERO FLUFF.
+                </h1>
+
+                <div className="border border-[#333333] p-6 mb-8">
+                    <div className="text-xs text-gray-400 uppercase mb-4 border-b border-[#333333] pb-2">
+                        CORE_FEATURES // SYSTEM_CAPABILITIES
+                    </div>
+                    <div className="grid grid-cols-2 gap-6">
+                        <div className="flex flex-col gap-2">
+                            <span className="text-[#00FF00] text-2xl">⚡</span>
+                            <span className="text-xs uppercase text-gray-400">200+ RAW PROMPTS.<br />COPY. PASTE. EXECUTE.</span>
+                        </div>
+                        <div className="flex flex-col gap-2">
+                            <span className="text-[#00FF00] text-2xl">🔋</span>
+                            <span className="text-xs uppercase text-gray-400">WORKS_WITH &gt;<br />GEMINI, CHATGPT, CLAUDE.</span>
+                        </div>
+                        <div className="flex flex-col gap-2">
+                            <span className="text-[#00FF00] text-2xl">🔄</span>
+                            <span className="text-xs uppercase text-gray-400">LIFETIME_UPDATES.<br />STAY SHARP.</span>
+                        </div>
+                        <div className="flex flex-col gap-2">
+                            <span className="text-[#00FF00] text-2xl">🛡️</span>
+                            <span className="text-xs uppercase text-gray-400">BATTLE_TESTED &<br />PROVEN. RELIABLE.</span>
+                        </div>
+                    </div>
+                </div>
+
+            </motion.div>
+
         </section>
     )
 }
+
+export default Hero
